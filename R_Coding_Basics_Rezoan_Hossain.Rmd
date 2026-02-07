@@ -1,0 +1,81 @@
+---
+title: "R Coding Basics"
+name: "Rezoan Hossain"
+output:
+  pdf_document: default
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(kableExtra)
+```
+
+
+1.  Why does this code not work?
+
+```{r}
+#| error: true
+
+my_variable <- 10
+my_varıable
+```
+
+Look carefully! (This may seem like an exercise in pointlessness, but training your brain to notice even the tiniest difference will pay off when programming.)
+
+**why it fails:**
+1) You created the object named `my_variable`.
+2) On the next line you typed `my_varıable` — that looks the same, but it uses a different character: `ı` (dotless i), not the normal `i`.
+3) R is picky (in a good way): different characters = different object name, so it says “object not found”.
+
+**Fix:** type the exact same name you created: `my_variable`.
+
+
+
+2.  Tweak each of the following R commands so that they run correctly:
+
+
+```{r}
+
+# Step 1: load the package correctly
+library(tidyverse)
+
+# Step 2: fix the ggplot code (spelling + commas + quotes + parentheses)
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+
+3.  Press Option + Shift + K / Alt + Shift + K. What happens? How can you get to the same place using the menus?
+
+**What happens (step-by-step):**
+
+1) RStudio opens the **Keyboard Shortcuts Help** window.
+2) You can scroll/search to see shortcuts.
+
+**Same place using menus:** `Tools` → `Keyboard Shortcuts Help`.
+
+
+
+4.  Run the following lines of code. Which of the two plots is saved as `mpg-plot.png`?  Why?
+
+```{r}
+#| eval: false
+
+my_bar_plot <- ggplot(mpg, aes(x = class)) +
+  geom_bar()
+my_scatter_plot <- ggplot(mpg, aes(x = cty, y = hwy)) +
+  geom_point()
+ggsave(filename = "mpg-plot.png", plot = my_bar_plot)
+```
+
+
+**Answer**
+
+1) `ggsave()` saves **`my_bar_plot`**.
+
+2) Why? Because you told it exactly which plot to save: `plot = my_bar_plot`.
+
+3) If you remove `plot = ...`, then `ggsave()` saves the **last plot you printed**.
